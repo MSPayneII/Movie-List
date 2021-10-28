@@ -6,19 +6,27 @@ const movieList = document.querySelector("ul");
 const message = document.querySelector("#message");
 // const addBtn = document.querySelector("button");
 
+const revealMessage = () => {
+  message.classList.remove("hide");
+  setTimeout(() => message.classList.add("hide"), 1000);
+};
+
 const deleteMovie = (event) => {
   event.target.parentNode.remove();
-  message.textContent = "Movie deleted!";
+  console.log(event.target);
+  message.textContent = `${event.target.parentNode["firstChild"]["innerHTML"]} deleted!`;
+  revealMessage();
 };
 
 const crossOffMovie = (event) => {
   event.target.classList.toggle("checked");
 
   if (event.target.classList.contains("checked")) {
-    message.textContent = "Movie watched!";
+    message.textContent = `${event.target.textContent} watched!`;
   } else {
-    message.textContent = "Movie added back!";
+    message.textContent = `${event.target.textContent} added back!`;
   }
+  revealMessage();
 };
 
 const addMovie = (event) => {
